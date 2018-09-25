@@ -24,7 +24,7 @@ app.post('/api/shorturl/new', function (req, res) {
 
   if (parsedUrl.hostname && (parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:")) {
     dns.lookup(parsedUrl.hostname, 4, function (err) {
-      if (err) return res.json({ error: "invalid URL" })
+      if (err) return res.status(422).json({ error: "invalid URL" })
       db.getDb().collection('urls').findOne({ original_url: req.body.url }, (function (err, result) {
         if (err) throw err;
         if (!result) return addNew();
@@ -33,7 +33,7 @@ app.post('/api/shorturl/new', function (req, res) {
       );
     })
   }
-  else res.json({ error: "invalid URL" })
+  else res.status(422).json({ error: "invalid URL" })
 
   function addNew() {
     db.getDb().collection('urls').insertOne({ _id: shortid.generate(), original_url: req.body.url }, function (err, results) {
@@ -41,6 +41,15 @@ app.post('/api/shorturl/new', function (req, res) {
       res.json({ "original_url": req.body.url, "short_url": results.insertedId });
     })
   }
+})
+
+app.get('/api/shorturl/:url', function (req, res) {
+  db.getDb().collection('urls').findOne({ _id: req.params.url }, (function (err, result) {
+    if (err) throw err;
+    if (!result) return res.status(404).json({ "error": "link not found" });
+    else res.redirect(result.original_url);
+  })
+  );
 })
 
 
