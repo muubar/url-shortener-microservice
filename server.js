@@ -56,3 +56,5 @@ app.get('/api/shorturl/:url', function (req, res) {
 app.listen(process.env.PORT, function () {
   console.log(`Node.js listening on port ${process.env.PORT}`);
 });
+
+module.exports = app;

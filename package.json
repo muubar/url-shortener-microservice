@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"lstart": "cross-env NODE_ENV=production PORT=3000 MONGODB_URI=mongodb://localhost:27017 nodemon server.js",
-		"test": "cross-env NODE_ENV=test PORT=3000 MONGODB_URI=mongodb://localhost:27017 mocha"
+		"test": "cross-env NODE_ENV=test PORT=3000 MONGODB_URI=mongodb://localhost:27017 mocha --timeout 10000 --sort"
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
