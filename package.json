@@ -4,7 +4,7 @@
 	"description": "FCC backend project: url shortener microservice",
 	"main": "server.js",
 	"scripts": {
-		"lstart": "cross-env NODE_ENV=production PORT=3000 MONGODB_DB=url MONGODB_URI=mongodb://heroku_59cjh31p:egb4oqfo5a8t78fvkmlm5dunh9@ds115533.mlab.com:15533/url nodemon server.js",
+		"lstart": "cross-env NODE_ENV=production PORT=3000 MONGODB_DB=url MONGODB_URI=mongodb://localhost:27017/url nodemon server.js",
 		"test": "cross-env NODE_ENV=test PORT=3000 MONGODB_DB=url MONGODB_URI=mongodb://localhost:27017/url mocha --timeout 10000 --sort"
 	},
 	"dependencies": {
